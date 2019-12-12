@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/bin"
-libdir     = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/lib/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0-FP00SSupDMq1s9sd25ocWs-puzzle"
-dynlibdir  = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/lib/x86_64-linux-ghc-8.6.5"
-datadir    = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/share/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0"
-libexecdir = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/libexec/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0"
-sysconfdir = "/home/yuki02/til/Haskell/puzzle/.stack-work/install/x86_64-linux/fdbe0fe1749f3b44717f22280fa5d743e897939e174d11ada93fc0895b440a47/8.6.5/etc"
+bindir     = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/bin"
+libdir     = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/lib/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0-FP00SSupDMq1s9sd25ocWs-puzzle"
+dynlibdir  = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/lib/x86_64-linux-ghc-8.6.5"
+datadir    = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/share/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0"
+libexecdir = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/libexec/x86_64-linux-ghc-8.6.5/puzzle-0.1.0.0"
+sysconfdir = "/mnt/e/til/Haskell/puzzle/.stack-work/install/x86_64-linux/5b6b051ee0abe8941b0af4a732570ca4adf65b9703d817febb44ab6d8c8659e1/8.6.5/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "puzzle_bindir") (\_ -> return bindir)
