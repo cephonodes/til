@@ -1,6 +1,7 @@
 module Main where
 import Numeric
 import Data.Char
+import Language.Haskell.Interpreter
 
 main :: IO ()
 main = do
@@ -14,4 +15,6 @@ generateBinList x = zip (map myShowBin [10..x]) (map reverse (map myShowBin [10.
 generateAllList x = zip3 (generateDecList x) (generateOctList x) (generateBinList x)
 solveQ01 x = [(a, c, e) | ((a, b), (c,d), (e, f)) <- (generateAllList x), a == b, c == d, e == f]
 
-test1 x = (++) (take 1 x) "+" ++ (test1 (tail x))
+test1 :: [Char] -> [Char]
+test1 [x] = [x]
+test1 xs = (++) (take 1 xs) "+" ++ (test1 (tail xs))
