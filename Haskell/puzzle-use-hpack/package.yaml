@@ -1,0 +1,21 @@
+name:                puzzle-use-hpack
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/cephonodes/puzzle-use-hpack#readme
+license:             BSD3
+author:              Yuki N
+maintainer:          yuki_cephonodes@outlook.com
+copyright:           2019 Yuki N
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - hint
+
+executables:
+  puzzle-use-hpack:
+    source-dirs:      src
+    main:             Main.hs
