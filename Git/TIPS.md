@@ -11,3 +11,16 @@ modified:   "\343\203\227\343\203\255\343\202\260\343\203\251\343\203\240\343\20
 ```
 git config --global core.quotepath false
 ```
+
+## コミット時に何か処理を実行する
+例えばコミットする前に必ずテストとlinterが実行されるようにしておいて、それをパスしていないとコミットできない、ということをしたいとき。
+
+### npmを使っているプロジェクト向け
+[husky](https://github.com/typicode/husky)を使えば、gitのコマンドをhookにして指定したコマンドを実行できる。
+npmでインストールしてpackage.jsonに設定を書くものである。
+
+例えばBoostnoteではlinterを実行するのに使われている。
+
+### その他のプロジェクト向け
+[Gitフック](https://git-scm.com/book/ja/v2/Git-のカスタマイズ-Git-フック)を使う。
+詳細はそのうち書く。
