@@ -14,6 +14,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
@@ -22,14 +23,10 @@ class Board extends React.Component {
 
   render() {
     const numbers = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
-    const boardRows = numbers.map(row => {
+    const boardRows = numbers.map((row, i) => {
       return (
-        <div className="board-row">
-          {
-            row.map(value => {
-              return (this.renderSquare(value));
-            })
-          }
+        <div className="board-row" key={i}>
+          {row.map(value => this.renderSquare(value))}
         </div>
       )
     });
@@ -52,6 +49,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      isHistoryAsc: true,
     };
   }
 
@@ -70,6 +68,12 @@ class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+    });
+  }
+
+  handleSortClick() {
+    this.setState({
+      isHistoryAsc: !this.state.isHistoryAsc,
     });
   }
 
@@ -94,10 +98,16 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{description}</button>
+          <button
+            className={move === this.state.stepNumber ? "bold" : "normal"}
+            onClick={() => this.jumpTo(move)}
+          >
+            {description}
+          </button>
         </li>
       )
     })
+    const sortBtnText = this.state.isHistoryAsc ? '降順に並べる' : '昇順に並べる';
 
     let status;
     if (winner) {
@@ -116,7 +126,8 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div><button onClick={() => this.handleSortClick()}>{sortBtnText}</button></div>
+          <ol>{this.state.isHistoryAsc ? moves : moves.reverse()}</ol>
         </div>
       </div>
     );
