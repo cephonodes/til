@@ -4,7 +4,9 @@ import './index.css'
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button
+      className={"square" + (props.isHighlight ? " highlight" : "")}
+      onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -16,6 +18,7 @@ class Board extends React.Component {
       <Square
         key={i}
         value={this.props.squares[i]}
+        isHighlight={this.props.cause.includes(i)}
         onClick={() => this.props.onClick(i)}
       />
     );
@@ -87,7 +90,7 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const result = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
       const position = step.position;
@@ -100,18 +103,21 @@ class Game extends React.Component {
         <li key={move}>
           <button
             className={move === this.state.stepNumber ? "bold" : "normal"}
-            onClick={() => this.jumpTo(move)}
-          >
+            onClick={() => this.jumpTo(move)}>
             {description}
           </button>
         </li>
       )
     })
-    const sortBtnText = this.state.isHistoryAsc ? '降順に並べる' : '昇順に並べる';
+    const sortBtnText = this.state.isHistoryAsc ? 'To DESC' : 'To ASC';
 
     let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
+    if (result) {
+      if (result.isDraw) {
+        status = 'Draw';
+      } else {
+        status = 'Winner: ' + result.winner;
+      }
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -121,6 +127,7 @@ class Game extends React.Component {
         <div className="game-board">
           <Board
             squares={current.squares}
+            cause={result ? result.cause : []}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
@@ -142,6 +149,14 @@ ReactDOM.render(
 );
 
 function calculateWinner(squares) {
+  if (!squares.includes(null)) {
+    return ({
+      isDraw: true,
+      winner: null,
+      cause: [],
+    });
+  }
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -154,8 +169,13 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
+    
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return ({
+        isDraw: false,
+        winner: squares[a],
+        cause: [a, b, c],
+      });
     }
   }
   return null;
