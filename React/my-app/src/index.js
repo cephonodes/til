@@ -21,23 +21,22 @@ class Board extends React.Component {
   }
 
   render() {
+    const numbers = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
+    const boardRows = numbers.map(row => {
+      return (
+        <div className="board-row">
+          {
+            row.map(value => {
+              return (this.renderSquare(value));
+            })
+          }
+        </div>
+      )
+    });
+
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {boardRows}
       </div>
     );
   }
@@ -49,6 +48,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        position: null
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -66,6 +66,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        position: i,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -85,8 +86,11 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
+      const position = step.position;
+      const col = position % 3 + 1;
+      const row = Math.floor(position / 3) + 1;
       const description = move ?
-        'Go to move #' + move :
+        `Go to move #${move} (${col}, ${row})` :
         'Go to game start';
       return (
         <li key={move}>
