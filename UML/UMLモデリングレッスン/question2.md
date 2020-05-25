@@ -31,7 +31,7 @@ class 口座 {
 @enduml
 ```
 
-### 回答
+### 正解
 ```puml
 @startuml
 class 支店 {
