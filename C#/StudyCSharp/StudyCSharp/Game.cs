@@ -6,13 +6,9 @@ namespace StudyCSharp
 {
     public class Game
     {
-        private bool isXNext;
         private char[,] cells = new char[3, 3];
 
-        public bool IsXNext
-        {
-            get { return isXNext; }
-        }
+        public bool IsXNext { get; private set; }
 
         public int PutSymbol(int row, int column)
         {
@@ -22,8 +18,8 @@ namespace StudyCSharp
             }
             else
             {
-                cells[row, column] = isXNext ? 'X' : 'O';
-                isXNext = !isXNext;
+                cells[row, column] = IsXNext ? 'X' : 'O';
+                IsXNext = !IsXNext;
                 return (0);
             }
         }
