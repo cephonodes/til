@@ -9,6 +9,11 @@ namespace StudyCSharp
         private bool isXNext;
         private char[,] cells = new char[3, 3];
 
+        public bool IsXNext
+        {
+            get { return isXNext; }
+        }
+
         public int PutSymbol(int row, int column)
         {
             if (cells[row, column] != '\0')

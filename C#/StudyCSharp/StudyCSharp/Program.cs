@@ -14,6 +14,7 @@ namespace StudyCSharp
 			// 盤面に交互に記号を置かせる
 			for (int i=0; i<3; i++)
 			{
+				Console.WriteLine("Next player is {0}.", game.IsXNext ? "X" : "O");
 				Console.WriteLine("Input position (Row): ");
 				var row = int.Parse(Console.ReadLine());
 				Console.WriteLine("Input position (Column): ");
@@ -21,7 +22,7 @@ namespace StudyCSharp
 
 				if (game.PutSymbol(row, column) != 0)
 				{
-					Console.WriteLine("Error");
+					Console.WriteLine("Already selected!");
 				}
 
 				Console.WriteLine(game.GenerateBoardVisual());
